@@ -304,7 +304,7 @@ function ShibLinkAdd(&$personal_urls, $title)
 		$personal_urls['SSOlogin'] = array(
 			'text' => $shib_LoginHint,
 			'href' => ($shib_Https ? 'https' :  'http') .'://' . $_SERVER['HTTP_HOST'] .
-			$shib_AssertionConsumerServiceURL . "/" . $shib_ConsumerPrefix . $shib_WAYFStyle .
+			getShibAssertionConsumerServiceURL() . "/" . $shib_ConsumerPrefix . $shib_WAYFStyle .
 			'?target=' . (isset($_SERVER['HTTPS']) ? 'https' : 'http') .
 			'://' . $_SERVER['HTTP_HOST'] . $pageurl, );
 	}
@@ -312,7 +312,7 @@ function ShibLinkAdd(&$personal_urls, $title)
 		$personal_urls['SSOlogin'] = array(
 			'text' => $shib_LoginHint,
 			'href' => ($shib_Https ? 'https' :  'http') .'://' . $_SERVER['HTTP_HOST'] .
-			$shib_AssertionConsumerServiceURL .
+			getShibAssertionConsumerServiceURL() .
 			'?target=' . (isset($_SERVER['HTTPS']) ? 'https' : 'http') .
 			'://' . $_SERVER['HTTP_HOST'] . $pageurl, );
 	}
@@ -320,7 +320,7 @@ function ShibLinkAdd(&$personal_urls, $title)
 		$personal_urls['SSOlogin'] = array(
 			'text' => $shib_LoginHint,
 			'href' => ($shib_Https ? 'https' :  'http') .'://' . $_SERVER['HTTP_HOST'] .
-			$shib_AssertionConsumerServiceURL . "/" . $shib_ConsumerPrefix . $shib_WAYF .
+			getShibAssertionConsumerServiceURL() . "/" . $shib_ConsumerPrefix . $shib_WAYF .
 			'?target=' . (isset($_SERVER['HTTPS']) ? 'https' : 'http') .
 			'://' . $_SERVER['HTTP_HOST'] . $pageurl, );
 	}
@@ -333,11 +333,12 @@ function ShibActive(&$personal_urls, $title)
         global $shib_LogoutHint, $shib_Https;
         global $shib_RN;
         global $shib_map_info;
+        global $shib_logout;
 
         $personal_urls['logout'] = array(
                 'text' => $shib_LogoutHint,
                 'href' => ($shib_Https ? 'https' : 'http') .'://' . $_SERVER['HTTP_HOST'] .
-                getShibAssertionConsumerServiceURL() . "/Logout" .
+                (isset($shib_logout) ? $shib_logout : getShibAssertionConsumerServiceURL() . "/Logout") .
                 '?return=' . (isset($_SERVER['HTTPS']) ? 'https' : 'http') .
                 '://'. $_SERVER['HTTP_HOST']. "/index.php?title=Special:UserLogout&amp;returnto=" .
                 $title->getPartialURL());
