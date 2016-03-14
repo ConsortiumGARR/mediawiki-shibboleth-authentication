@@ -6,7 +6,7 @@ wget https://raw.githubusercontent.com/malavolti/mediawiki-shibboleth-authentica
 ~~~
 
 
-### `LocalSettings.php` configuration example
+### `LocalSettings.php` configuration example to add
 
 ~~~PHP
 require_once('extensions/ShibAuthPlugin.php');
