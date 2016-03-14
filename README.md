@@ -2,7 +2,7 @@
 
 ~~~BASH
 cd /var/www/html/mediawiki-1.23.13
-wget ...login.php -O login.php
+wget https://raw.githubusercontent.com/malavolti/mediawiki-shibboleth-authentication/master/login.php -O login.php
 ~~~
 
 
