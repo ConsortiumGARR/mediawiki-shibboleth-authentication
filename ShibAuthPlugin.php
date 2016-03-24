@@ -453,7 +453,7 @@ function ShibUserLoadFromSession($user, &$result)
         $shib_pretend = true;
 
         //Now we _do_ the black magic
-        //$lf->mRemember = false;
+        $lf->mRemember = false;
         $user->loadDefaults($shib_UN);
         $lf->initUser($user, true);
 
