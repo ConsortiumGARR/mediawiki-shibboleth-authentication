@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Internal Verson: 10.2.0
- * Forked from version 1.2.4 (Works out of box with MW 1.7 or above)
+ * Version 1.2.6
  *
  * Authentication Plugin for Shibboleth (http://shibboleth.internet2.edu)
  * Derived from AuthPlugin.php
