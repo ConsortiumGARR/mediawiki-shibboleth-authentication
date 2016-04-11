@@ -107,9 +107,9 @@ class ShibAuthPlugin extends AuthPlugin {
                 wfRunHooks('ShibUpdateUser', array($this->existingUser, &$user));
 
                 //For security, set password to a non-existant hash.
-                if ($user->mPassword != "nologin"){
-                        $user->mPassword = "nologin";
-                }
+                //if ($user->mPassword != "nologin"){
+                //        $user->mPassword = "nologin";
+                //}
 
                 $user->setOption('rememberpassword', 0);
                 $user->saveSettings();
@@ -372,7 +372,7 @@ function ShibUserLoadFromSession($user, &$result)
         global $shib_map_info;
         global $shib_map_info_existing;
         global $shib_pretend;
-	global $shib_groups;
+	     global $shib_groups;
 
         //MW needs usernames in capital!
         $shib_UN = Title::makeTitleSafe( NS_USER, $shib_UN);
@@ -401,7 +401,7 @@ function ShibUserLoadFromSession($user, &$result)
                 $wgAuth->updateUser($user); //Make sure password is nologin
                 wfSetupSession();
                 $user->setCookies();
-		ShibAddGroups($user);
+		          ShibAddGroups($user);
                 return true;
         }
 
@@ -463,7 +463,7 @@ function ShibUserLoadFromSession($user, &$result)
         $user->saveSettings();
         wfSetupSession();
         $user->setCookies();
-	ShibAddGroups($user);
+	     ShibAddGroups($user);
         return true;
 }
 function ShibAddGroups($user) {
