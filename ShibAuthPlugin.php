@@ -333,13 +333,15 @@ function ShibActive(&$personal_urls, $title)
         global $shib_RN;
         global $shib_map_info;
         global $shib_logout;
+        
+        global $wgScript;
 
         $personal_urls['logout'] = array(
                 'text' => $shib_LogoutHint,
                 'href' => ($shib_Https ? 'https' : 'http') .'://' . $_SERVER['HTTP_HOST'] .
                 (isset($shib_logout) ? $shib_logout : getShibAssertionConsumerServiceURL() . "/Logout") .
                 '?return=' . (isset($_SERVER['HTTPS']) ? 'https' : 'http') .
-                '://'. $_SERVER['HTTP_HOST']. "/index.php?title=Special:UserLogout&amp;returnto=" .
+                '://'. $_SERVER['HTTP_HOST']. $wgScript. "?title=Special:UserLogout&amp;returnto=" .
                 $title->getPartialURL());
 
         if ($shib_RN && $shib_map_info)
