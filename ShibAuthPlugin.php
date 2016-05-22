@@ -472,10 +472,20 @@ function ShibAddGroups($user) {
 	global $shib_groups;
 	global $shib_group_prefix;
 	global $shib_group_delete;
+    global $shib_group_delete_skip;
+    global $shib_group_map;
 
 	if (isset($shib_group_delete) && $shib_group_delete) {
 		$oldGroups = $user->getGroups();
         	foreach ($oldGroups as $group) {
+                
+                    // Don't remove certain groups
+                	if (isset($shib_group_delete_skip) && count($shib_group_delete_skip) > 0 ) {
+                        if ( in_array($group, $shib_group_delete_skip) ) {
+                                continue;
+                        }
+                    }
+                
                 	$user->removeGroup($group);
         	}
 	}
@@ -484,13 +494,17 @@ function ShibAddGroups($user) {
 		foreach (explode(';', $shib_groups) as $group) {
 			if (isset($shib_group_prefix) && !empty($shib_group_prefix)) {
 				$vals = explode(":", $group);
-				if ($vals[0] == "wiki") {
-					$user->addGroup($vals[1]);
-				}
+				if ($vals[0] == $shib_group_prefix) {
+					$group = $vals[1];
+                }
 			}
-			else {
-				$user->addGroup($group);
-			}
+            
+            // Allow mapping of groups
+            if (isset($shib_group_map) && array_key_exists($group, $shib_group_map)) {
+                $group = $shib_group_map[$group];
+            }
+            
+            $user->addGroup($group);
 		}
 	}
 }
